@@ -1,7 +1,7 @@
-// Form.tsx
+// InputForm.tsx
 import React, { useState } from 'react';
 
-const Form = () => {
+const InputForm = () => {
     const [formData, setFormData] = useState({
       fromDate: '',
       toDate: '',
@@ -48,4 +48,4 @@ const Form = () => {
     );
   };
 
-export default Form;
+export default InputForm;
