@@ -1,27 +1,15 @@
-// App
-// ---
-// 3 concerns
-// - AddTodoForm
-// - TodoList
-// - TodoListItem (check todo items)
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import BookingPage from './BookingPage';
 
-import {useState} from 'react';
-import AddTodoForm from './AddTodoForm';
-import Navba from './room_booking/Navbar';
-
-// state
-// - list of todos (derive: how many todos)
-
-
-export default function App() {
-  const [page, setPage] = useState('reserve');
-
+function App() {
   return (
-    <div>
-     <Navbar setPage={setPage} />
-        {page === 'reserve' && <Form />}
-        {page === 'bookings' && <h2>Bookings</h2>}
-        {page === 'customers' && <h2>Customers</h2>}
-      </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<BookingPage />} />
+      </Routes>
+    </Router>
   );
 }
+
+export default App;
