@@ -6,7 +6,8 @@ function RoomSearchForm() {
   const [endDate, setEndDate] = useState('');
   const [guests, setGuests] = useState(1);
   const [balcony, setBalcony] = useState(false);
-  const [availableRooms, setAvailableRooms] = useState(null); // Initialize as null
+  const [availableRooms, setAvailableRooms] = useState(null);
+  const [showBookRoomForm, setShowBookRoomForm] = useState(false);
 
   const handleGuestsChange = (e) => {
     setGuests(parseInt(e.target.value, 10));
@@ -14,28 +15,31 @@ function RoomSearchForm() {
 
   const searchAvailableRooms = async () => {
     try {
-        const url = `http://localhost:8083/getFreeRooms?start=${startDate}&end=${endDate}&numberOfGuest=${guests}&withBalcony=${balcony}`;
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
+      const url = `http://localhost:8083/getFreeRooms?start=${startDate}&end=${endDate}&numberOfGuest=${guests}&withBalcony=${balcony}`;
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch available rooms');
-        }
+      if (!response.ok) {
+        throw new Error('Failed to fetch available rooms');
+      }
 
-        const data = await response.json();
-        console.log('Fetched data:', data);
-        setAvailableRooms(data);
+      const data = await response.json();
+      setAvailableRooms(data);
     } catch (error) {
-        console.error(error);
+      console.error(error);
     }
-};
+  };
 
   const handleBalconyChange = (e) => {
     setBalcony(e.target.checked);
+  };
+
+  const handleBookClick = () => {
+    setShowBookRoomForm(true);
   };
 
   return (
@@ -52,9 +56,20 @@ function RoomSearchForm() {
           <span className="ml-2">Balcony</span>
         </label>
         <button onClick={searchAvailableRooms} className="bg-blue-500 text-white px-4 py-2 rounded">Search</button>
+        {/* Render AvailableRooms component and pass start, end, and guests props */}
+        {availableRooms !== null && (
+          <AvailableRooms
+            availableRooms={availableRooms}
+            start={startDate}
+            end={endDate}
+            numberOfGuests={guests}
+          />
+        )}
+        {/* Show the "Book" button only if availableRooms is not null */}
+        {availableRooms !== null && !showBookRoomForm && (
+          <button onClick={handleBookClick} className="bg-blue-500 text-white px-4 py-2 rounded">Book</button>
+        )}
       </div>
-      {/* Render AvailableRooms component only if availableRooms is not null */}
-      {availableRooms !== null && <AvailableRooms availableRooms={availableRooms} />}
     </div>
   );
 }
