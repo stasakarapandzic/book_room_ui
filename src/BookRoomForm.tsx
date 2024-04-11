@@ -19,6 +19,9 @@ function BookRoomForm({ roomNumber, start, end, numberOfGuests }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const diference=new Date(end).getTime()-new Date(start).getTime();
+    const nights = Math.ceil(diference / (1000 * 60 * 60 * 24));
+    console.log(nights);
     try {
       const response = await fetch('http://localhost:8081/command/bookRoom', {
         method: 'POST',
@@ -31,7 +34,7 @@ function BookRoomForm({ roomNumber, start, end, numberOfGuests }) {
           address,
           birthDate,
           start,
-          end,
+          nights,
           numberOfGuests,
         }),
       });

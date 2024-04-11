@@ -16,7 +16,7 @@ function CancelBookingForm() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          reservationNumber: bookingId, // Assuming the backend expects "reservationNumber" instead of "bookingId"
+          bookingId // Assuming the backend expects "reservationNumber" instead of "bookingId"
         }),
       });
 
