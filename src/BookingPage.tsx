@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Header from "./Header";
 import RoomSearchForm from "./RoomSearchForm";
-import AvailableRooms from "./AvailableRooms"
 
 // Inside the BookingPage component
 function BookingPage() {    
