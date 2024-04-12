@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function BookRoomForm({ roomNumber, start, end, numberOfGuests }) {
+function BookRoomForm({ roomNumber, start, end, numberOfGuests, again}) {
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
   const [birthDate, setBirthDate] = useState('');
@@ -42,11 +42,13 @@ function BookRoomForm({ roomNumber, start, end, numberOfGuests }) {
         throw new Error('Failed to book room');
       }
 
+
       console.log('Room booked successfully');
       // Reset form fields after successful submission
       setName('');
       setAddress('');
       setBirthDate('');
+      again;
     } catch (error) {
       console.error(error);
     }

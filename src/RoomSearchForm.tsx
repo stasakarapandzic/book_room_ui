@@ -13,26 +13,28 @@ function RoomSearchForm() {
     setGuests(parseInt(e.target.value, 10));
   };
 
-  const searchAvailableRooms = async () => {
-    try {
-      const url = `http://localhost:8083/getFreeRooms?start=${startDate}&end=${endDate}&numberOfGuest=${guests}&withBalcony=${balcony}`;
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch available rooms');
+    const searchAvailableRooms = async () => {
+      try {
+        const url = `http://localhost:8083/getFreeRooms?start=${startDate}&end=${endDate}&numberOfGuest=${guests}&withBalcony=${balcony}`;
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!response.ok) {
+          console.log('Failed to fetch available rooms');
+        }
+
+        const data = await response.json();
+        setAvailableRooms(data);
+      } catch (error) {
+        console.error(error);
       }
+    };
 
-      const data = await response.json();
-      setAvailableRooms(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const handleBalconyChange = (e) => {
     setBalcony(e.target.checked);
@@ -63,6 +65,7 @@ function RoomSearchForm() {
             start={startDate}
             end={endDate}
             numberOfGuests={guests}
+            again={searchAvailableRooms()}
           />
         )}
         {/* Show the "Book" button only if availableRooms is not null */}

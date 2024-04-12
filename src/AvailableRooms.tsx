@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import BookRoomForm from './BookRoomForm'; 
 
-function AvailableRooms({ availableRooms, start, end, numberOfGuests }) {
+function AvailableRooms({ availableRooms, start, end, numberOfGuests , again}) {
   // State to manage whether the book room form should be displayed
   const [showBookRoomForm, setShowBookRoomForm] = useState(false);
   // State to keep track of the selected room for booking
@@ -31,6 +31,7 @@ function AvailableRooms({ availableRooms, start, end, numberOfGuests }) {
                 start={start}
                 end={end}
                 numberOfGuests={numberOfGuests}
+                again={again}
               />
             )}
           </li>

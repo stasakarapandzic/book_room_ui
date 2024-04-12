@@ -8,10 +8,10 @@ function CancelBookingForm() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+
     try {
       const response = await fetch('http://localhost:8081/command/cancelBooking', {
-        method: 'PUT', // Change method to PUT
+        method: 'POST', // Change method to PUT
         headers: {
           'Content-Type': 'application/json',
         },
