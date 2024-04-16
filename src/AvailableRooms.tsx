@@ -21,7 +21,7 @@ function AvailableRooms({ availableRooms, start, end, numberOfGuests , again}) {
           <li key={room.roomNumber} className="border border-gray-300 p-4 my-2 rounded">
             <p className="font-semibold">Room {room.roomNumber}</p>
             <p>MaxCapacity: {room.maxCapacity}</p> 
-            <p>Balcony: ${room.withBalcony}</p>
+            {room.withBalcony &&<p>with balcony</p>}
             {/* Render the button with an onClick handler */}
             <button onClick={() => handleBookRoomClick(room.roomNumber)}>Book this room</button>
             {/* Render BookRoomForm only if showBookRoomForm is true and the selected room matches the current room */}

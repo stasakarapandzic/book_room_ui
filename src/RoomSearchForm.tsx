@@ -36,8 +36,8 @@ function RoomSearchForm() {
     };
 
 
-  const handleBalconyChange = (e) => {
-    setBalcony(e.target.checked);
+  const handleBalconyChange = () => {
+    setBalcony(!balcony);
   };
 
   const handleBookClick = () => {
@@ -54,7 +54,7 @@ function RoomSearchForm() {
         <label htmlFor="guests">Guests:</label>
         <input type="number" id="guests" value={guests.toString()} onChange={handleGuestsChange} />
         <label htmlFor="balcony" className="flex items-center">
-          <input type="checkbox" id="balcony" checked={balcony} onChange={handleBalconyChange} />
+          <input type="checkbox" id="balcony" onChange={handleBalconyChange} />
           <span className="ml-2">Balcony</span>
         </label>
         <button onClick={searchAvailableRooms} className="bg-blue-500 text-white px-4 py-2 rounded">Search</button>
